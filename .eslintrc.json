@@ -15,8 +15,12 @@
         "project": ["./tsconfig.json"]
       },
       "rules": {
-        // "@typescript-eslint/rule-name": "error",
-        "global-require": 0
+        "indent": "off",
+        "global-require": 0,
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/no-explicit-any": 2,
+        "comma-dangle": "off",
+        "@typescript-eslint/comma-dangle": "off"
       }
     }
   ],
@@ -40,9 +44,8 @@
         "no-console": 0,
         "class-methods-use-this": "off",
         "indent": "off",
-        "comma-dangle": 0,
+        "comma-dangle": "off",
         "global-require": 0,
-        "@typescript-eslint/no-explicit-any": "on"
-        // "@typescript-eslint/rule-name": "error"
+        "object-curly-newline":"off"
     }
 }
