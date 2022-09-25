@@ -1,8 +1,30 @@
 {
     "plugins": ["prettier", "import"],
+    "overrides": [
+    {
+      "plugins": ["@typescript-eslint"],
+      "parser": "@typescript-eslint/parser",
+      "files": ["*.ts", "*.tsx"],
+      "excludedFiles": "*.js", 
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "airbnb-typescript/base"
+      ],
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      },
+      "rules": {
+        // "@typescript-eslint/rule-name": "error",
+        "global-require": 0
+      }
+    }
+  ],
     "extends": [
+        "eslint:recommended",
         "plugin:prettier/recommended",
-        "prettier"
+        "prettier", 
+        "airbnb"
     ],
     "parserOptions": {
         "ecmaVersion": 2020,
@@ -16,6 +38,11 @@
     "rules": {
         "no-debugger": "off",
         "no-console": 0,
-        "class-methods-use-this": "off"
+        "class-methods-use-this": "off",
+        "indent": "off",
+        "comma-dangle": 0,
+        "global-require": 0,
+        "@typescript-eslint/no-explicit-any": "on"
+        // "@typescript-eslint/rule-name": "error"
     }
 }
