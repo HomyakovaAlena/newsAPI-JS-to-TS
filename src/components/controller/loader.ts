@@ -1,6 +1,6 @@
 interface Resp {
     options?: Options;
-    endpoint?: string;
+    endpoint: string;
 }
 
 interface Options {
