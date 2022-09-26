@@ -1,6 +1,8 @@
+import { Data } from '../view/appView';
+
 interface Resp {
     options?: Options;
-    endpoint: string;
+    endpoint: 'sources' | 'everything';
 }
 
 interface Options {
@@ -9,11 +11,14 @@ interface Options {
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 type BaseLink = string;
+interface CallBackOneParameter {
+    (param1: Data): void;
+}
 
-interface LoaderFunc<T> extends Resp {
+interface LoaderFunc extends Resp {
     method: Method;
     endpoint: Resp['endpoint'];
-    callback: (data: T) => void;
+    callback: CallBackOneParameter;
 }
 
 abstract class Loader {
@@ -28,7 +33,7 @@ abstract class Loader {
 
     getResp(
         { endpoint, options = {} }: Resp,
-        callback = () => {
+        callback: CallBackOneParameter = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -51,7 +56,7 @@ abstract class Loader {
         return res;
     }
 
-    makeUrl({ options, endpoint = '' }: Resp): string {
+    makeUrl({ options, endpoint }: Resp): string {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -62,13 +67,13 @@ abstract class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>({ method, endpoint, callback, options }: LoaderFunc<T>): void {
+    load({ method, endpoint, callback, options }: LoaderFunc): void {
         fetch(this.makeUrl({ options, endpoint }), { method })
             .then(this.errorHandler.bind(this))
-            .then<T>((res) => res.json())
-            .then((data: T) => callback(data))
+            .then((res) => res.json())
+            .then((data: Data) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }
 
-export default Loader;
+export { Loader, CallBackOneParameter };

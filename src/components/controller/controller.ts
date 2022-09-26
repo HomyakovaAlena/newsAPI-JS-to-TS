@@ -1,5 +1,5 @@
 import AppLoader from './appLoader';
-// import { DOMEvent } from '../utils/utils';
+import { CallBackOneParameter } from './loader';
 
 // interface HandleNameChangeInterface {
 //     target: HTMLElement;
@@ -7,16 +7,12 @@ import AppLoader from './appLoader';
 // }
 
 class AppController extends AppLoader {
-    getSources(callback: <T>(...args: T[]) => void): void {
-        super.getResp(
-            {
-                endpoint: 'sources',
-            },
-            callback
-        );
+    getSources(callback: CallBackOneParameter): void {
+        super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: <T>(...args: T[]) => void): void {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    getNews(e: Event, callback: CallBackOneParameter): void {
         let { target } = e;
         const newsContainer = e.currentTarget;
 
