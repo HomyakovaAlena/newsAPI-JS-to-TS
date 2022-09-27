@@ -12,10 +12,8 @@ interface DataSources {
 
 class Sources {
     draw(data: DataSources[]): void {
-        console.log({ data });
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
-
         data.forEach((item) => {
             const sourceClone = sourceItemTemp?.content.cloneNode(true) as DocumentFragment;
             const itemElement = sourceClone.querySelector('.source__item-name') as HTMLElement;
@@ -25,7 +23,6 @@ class Sources {
         });
         const sourcesContainer = document.querySelector('.sources');
         sourcesContainer?.append(fragment);
-        console.log({ sourcesContainer });
     }
 }
 

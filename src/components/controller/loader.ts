@@ -11,14 +11,14 @@ interface Options {
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 type BaseLink = string;
-interface CallBackOneParameter {
-    (param1: Data): void;
+interface CallBackFunc {
+    (arg: Data): void;
 }
 
 interface LoaderFunc extends Resp {
     method: Method;
     endpoint: Resp['endpoint'];
-    callback: CallBackOneParameter;
+    callback: CallBackFunc;
 }
 
 abstract class Loader {
@@ -33,7 +33,7 @@ abstract class Loader {
 
     getResp(
         { endpoint, options = {} }: Resp,
-        callback: CallBackOneParameter = () => {
+        callback: CallBackFunc = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -52,7 +52,6 @@ abstract class Loader {
             }
             throw Error(res.statusText);
         }
-
         return res;
     }
 
@@ -63,7 +62,6 @@ abstract class Loader {
         Object.keys(urlOptions).forEach((key: keyof Options) => {
             url += `${key}=${urlOptions[key]}&`;
         });
-
         return url.slice(0, -1);
     }
 
@@ -76,4 +74,4 @@ abstract class Loader {
     }
 }
 
-export { Loader, CallBackOneParameter };
+export { Loader, CallBackFunc };

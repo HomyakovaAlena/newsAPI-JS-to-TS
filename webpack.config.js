@@ -17,7 +17,7 @@ const baseConfig = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
-            { test: /\.js$/, loader: 'source-map-loader' },
+            { test: /\.ts$/, loader: 'source-map-loader' },
         ],
     },
     resolve: {

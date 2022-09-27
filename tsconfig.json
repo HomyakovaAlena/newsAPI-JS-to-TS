@@ -2,7 +2,7 @@
   "compilerOptions": {
       "outDir": "./dist/",
       "allowJs": true,
-      "target": "es5",
+      "target": "ES6",
       "sourceMap": true,
       "noImplicitAny": true,
       "noEmitOnError": true,
@@ -12,7 +12,7 @@
       "module": "es2022",
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
-      "moduleResolution": "node"
+      "moduleResolution": "nodenext"
   },
   "include": ["./src/**/*"]
 }

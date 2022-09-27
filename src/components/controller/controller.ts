@@ -1,16 +1,14 @@
 import AppLoader from './appLoader';
-import { CallBackOneParameter } from './loader';
+import { CallBackFunc } from './loader';
 
 class AppController extends AppLoader {
-    getSources(callback: CallBackOneParameter): void {
+    getSources(callback: CallBackFunc): void {
         super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: CallBackOneParameter): void {
+    getNews(e: Event, callback: CallBackFunc): void {
         let { target } = e;
-        console.log({ target });
         const sourcesContainer = e.currentTarget as HTMLElement;
-        console.log({ sourcesContainer });
 
         while (target !== sourcesContainer) {
             if (!(target instanceof HTMLElement && target.classList.contains('source__item'))) return;
