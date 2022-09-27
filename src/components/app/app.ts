@@ -1,6 +1,5 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-// import { DOMEvent } from '../utils/utils';
 
 class App {
     controller: AppController;
