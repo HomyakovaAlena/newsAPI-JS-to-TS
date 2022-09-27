@@ -9,6 +9,10 @@ const baseConfig = {
     module: {
         rules: [
             {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+            {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
@@ -26,6 +30,10 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
+        assetModuleFilename: (pathData) => {
+            const filepath = path.dirname(pathData.filename).split('/').slice(1).join('/');
+            return `src/${filepath}/[name][ext]`;
+        },
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -1,17 +1,22 @@
 import './sources.css';
 
-interface DataSources {
-    category: string;
-    country: string;
-    description: string;
-    id: string;
-    language: string;
-    name: string;
-    url: string;
+type DataSources = Required<DataSourcesRequired> & Partial<DataSourcesOptional>;
+
+interface DataSourcesRequired {
+    readonly id: string;
+    readonly name: string;
+}
+
+interface DataSourcesOptional {
+    readonly category: string;
+    readonly country: string;
+    readonly description: string;
+    readonly language: string;
+    readonly url: string;
 }
 
 class Sources {
-    draw(data: DataSources[]): void {
+    public draw(data: DataSources[]): void {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         data.forEach((item) => {

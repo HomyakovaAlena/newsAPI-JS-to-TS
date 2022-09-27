@@ -2,26 +2,26 @@ import { News, DataNews } from './news/news';
 import { Sources, DataSources } from './sources/sources';
 
 interface Data {
-    sources: DataSources[];
-    articles: DataNews[];
+    readonly sources: DataSources[];
+    readonly articles: DataNews[];
 }
 
 class AppView {
-    news: News;
+    private readonly news: News;
 
-    sources: Sources;
+    private readonly sources: Sources;
 
     constructor() {
         this.news = new News();
         this.sources = new Sources();
     }
 
-    drawNews(data: Data) {
+    public drawNews(data: Data): void {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: Data) {
+    public drawSources(data: Data): void {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

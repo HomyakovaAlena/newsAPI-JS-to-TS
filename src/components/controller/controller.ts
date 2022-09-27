@@ -1,12 +1,13 @@
+import { Data } from '../view/appView';
 import AppLoader from './appLoader';
 import { CallBackFunc } from './loader';
 
 class AppController extends AppLoader {
-    getSources(callback: CallBackFunc): void {
+    public getSources(callback: CallBackFunc<Data, void>): void {
         super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: CallBackFunc): void {
+    public getNews(e: Event, callback: CallBackFunc<Data, void>): void {
         let { target } = e;
         const sourcesContainer = e.currentTarget as HTMLElement;
 

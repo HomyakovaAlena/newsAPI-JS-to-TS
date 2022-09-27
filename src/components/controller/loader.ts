@@ -1,39 +1,34 @@
 import { Data } from '../view/appView';
 
-interface Resp {
-    options?: Options;
-    endpoint: 'sources' | 'everything';
+interface LoaderFunc {
+    readonly method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    readonly callback: CallBackFunc<Data, void>;
+    readonly options?: Options;
+    readonly endpoint: 'sources' | 'everything';
 }
 
+type RequestConfig = Pick<LoaderFunc, 'options' | 'endpoint'>;
 interface Options {
-    [key: string]: string | number;
+    readonly [key: string]: string;
 }
 
-type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-type BaseLink = string;
-interface CallBackFunc {
-    (arg: Data): void;
-}
-
-interface LoaderFunc extends Resp {
-    method: Method;
-    endpoint: Resp['endpoint'];
-    callback: CallBackFunc;
+interface CallBackFunc<T, U> {
+    (arg: T): U;
 }
 
 abstract class Loader {
-    baseLink: BaseLink;
+    private readonly baseLink: string;
 
-    options: Options;
+    private readonly options: Options;
 
-    constructor(baseLink: BaseLink, options: Options) {
+    protected constructor(baseLink: string, options: Options) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp(
-        { endpoint, options = {} }: Resp,
-        callback: CallBackFunc = () => {
+    protected getResp(
+        { endpoint, options = {} }: RequestConfig,
+        callback: CallBackFunc<Data, void> = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -45,7 +40,7 @@ abstract class Loader {
         });
     }
 
-    errorHandler(res: Response): Response {
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404) {
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -55,7 +50,7 @@ abstract class Loader {
         return res;
     }
 
-    makeUrl({ options, endpoint }: Resp): string {
+    private makeUrl({ options, endpoint }: RequestConfig): string {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -65,7 +60,7 @@ abstract class Loader {
         return url.slice(0, -1);
     }
 
-    load({ method, endpoint, callback, options }: LoaderFunc): void {
+    private load({ method, endpoint, callback, options }: LoaderFunc): void {
         fetch(this.makeUrl({ options, endpoint }), { method })
             .then(this.errorHandler.bind(this))
             .then((res) => res.json())

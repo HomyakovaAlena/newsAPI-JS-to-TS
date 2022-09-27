@@ -1,11 +1,63 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 90vw;
+    margin: 0;
+    padding: 0;
+}
+
+.dropbtn {
+    background-color: #3fcc59;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    display: block;
+    width: 90vw;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.dropdown:hover .sources {
+    display: flex;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
 .sources {
     display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 120px;
-    overflow: auto;
+    flex-wrap: wrap;
+    background-color: #1a2224;
+    width: 90vw;
+    height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
     align-items: center;
-    font: 300 1em 'Fira Sans', sans-serif;
+    font: 300 14px 'Fira Sans', sans-serif;
+    margin: 0 auto;
+    display: none;
+    position: absolute;
+    z-index: 2;
+}
+
+.sources::-webkit-scrollbar {
+    width: 15px;
+}
+
+.sources::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+.sources::-webkit-scrollbar-thumb {
+    background: #30c5ff;
+    border-radius: 10px;
+}
+
+.sources::-webkit-scrollbar-thumb:hover {
+    background: #3fcc59;
 }
 
 .source__item {
@@ -31,4 +83,15 @@
 .source__item-name {
     font-weight: 400;
     white-space: nowrap;
+}
+
+@media all and (max-width: 700px) {
+    .sources {
+        font: 300 14px 'Fira Sans', sans-serif;
+    }
+
+    .source__item {
+        margin: 5px;
+        padding: 10px;
+    }
 }
