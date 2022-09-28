@@ -30,7 +30,7 @@ abstract class Loader {
         { endpoint, options = {} }: RequestConfig,
         callback: CallBackFunc<Data, void> = () => {
             console.error('No callback for GET response');
-        }
+        },
     ): void {
         this.load({
             method: 'GET',

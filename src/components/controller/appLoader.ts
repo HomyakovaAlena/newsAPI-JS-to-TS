@@ -2,7 +2,7 @@ import { Loader } from './loader';
 
 enum URLconfig {
     baselink = 'https://newsapi.org/v2/',
-    apiKey = 'fad500235f9d4b72ad0ac2517507b33c',
+    apiKey = 'c75b740205d64e729211a583a172d058',
 }
 
 class AppLoader extends Loader {
