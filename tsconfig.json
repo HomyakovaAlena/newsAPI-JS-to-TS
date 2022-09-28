@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+      "outDir": "./dist/",
+      "allowJs": true,
+      "target": "ES6",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "noEmitOnError": true,
+      "strict": true,
+      "allowUnusedLabels": false,
+      "allowUnreachableCode": false,
+      "module": "es2022",
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "moduleResolution": "nodenext"
+  },
+  "include": ["./src/**/*"]
+}
